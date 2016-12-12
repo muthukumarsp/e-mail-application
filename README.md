@@ -58,8 +58,6 @@ go to [http://0.0.0.0:3000](http://0.0.0.0:3000) or [http://localhost:3000](http
 * [Contributing](#contributing)
 * [TypeScript](#typescript)
 * [@Types](#types)
-* [Frequently asked questions](#frequently-asked-questions)
-* [Support, Questions, or Feedback](#support-questions-or-feedback)
 * [License](#license)
 
 
