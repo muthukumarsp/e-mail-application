@@ -1,0 +1,25 @@
+//$stardard_margin_top_bottom: 21px;
+//$stardard_margin_left_right: 43px;
+@import "../../assets/scss/global-variables";
+
+:host {
+  display: block;
+  padding: 0 16px;
+  //font-size: 25px;
+}
+
+header {
+  padding: 5rem 1rem;
+  .compose-button {
+    background-color: $btn-primary-bg-color;
+    color: $btn-primary-color;
+  }
+}
+
+.col-xs-3 {
+  border: 1px solid green;
+}
+
+.col-xs-4 {
+  border: 1px solid red;
+}

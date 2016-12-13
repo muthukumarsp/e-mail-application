@@ -2,11 +2,11 @@ import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
-  selector: 'about',
-  styles: [require('./about.component.scss')],
-  templateUrl: 'about.component.html'
+  selector: 'email-home-page',
+  styles: [require('./email-home.component.scss')],
+  templateUrl: 'email-home.component.html'
 })
-export class AboutComponent {
+export class EmailHomeComponent {
   localState: any;
 
   constructor(public route: ActivatedRoute) {
