@@ -1,4 +1,53 @@
-<div class="row">
-    New Message
-
+<div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title">New Message</h4>
 </div>
+<form [formGroup]="form" (ngSubmit)="send($event)">
+
+    <div class="modal-body">
+
+        <div class="email-receiver-field">
+            <label for="to-field" class="input-label">
+                To:
+            </label>
+            <input formControlName="toField" type="email" class="email-input" id="to-field" multiple>
+        </div>
+
+        <div class="email-receiver-field">
+            <label for="cc-field">
+                Cc:
+            </label>
+            <input formControlName="ccField" type="email" class="email-input" id="cc-field" multiple>
+        </div>
+
+        <div class="email-receiver-field">
+            <label for="bcc-field">
+                Bcc:
+            </label>
+            <input formControlName="bccField" type="email" class="email-input" id="bcc-field" multiple>
+        </div>
+
+        <div class="email-subject">
+            <input formControlName="subject" class="subject-input" placeholder="subject">
+        </div>
+
+        <div class="email-body">
+            <textarea formControlName="emailBodyText" class="email-body-text"></textarea>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Send</button>
+        <!--<button type="button" class="btn btn-secondary" (click)="activeModal.close('Close click')">Close</button>-->
+    </div>
+    s
+
+</form>
+
+<p>Value: {{ form.value | json }}</p>
+<p>Validation status: {{ form.status }}</p>
+`
+
+

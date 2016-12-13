@@ -1,14 +1,59 @@
+@import "../../assets/scss/global-variables";
 
+$color-black: #000;
+
+$margin-standard: 1rem;
+$margin-small: .25rem;
+
+$border-standard: 1px solid lightgray;
 :host {
   display: block;
-  padding: 0 16px;
-  //font-size: 25px;
 }
-  h2 {
-    font-size: 24px;
-    font-weight: 500;
-    letter-spacing: 0.005em;
-    margin-bottom: 0;
-    margin-top: 0.83em;
-  }
 
+.modal-header {
+  background: $color-black;
+  color: $text-color-white;
+}
+
+.modal-body {
+  padding: 0;
+  .email-receiver-field {
+
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+    margin: $margin-standard;
+  }
+  .email-input {
+    margin-left: $margin-standard;
+    margin-right: $margin-small;
+    height: 40px;
+    flex: 1;
+  }
+  .email-subject {
+    display:flex;
+    flex-grow: 1;
+    .subject-input {
+      border-top: $border-standard ;
+      border-bottom: $border-standard ;
+      border-left:none;
+      border-right:none;
+      flex: 1;
+      height:35px;
+    }
+
+  }
+  .email-body {
+    display: flex;
+    margin-top: $margin-standard;
+    margin-left: $margin-small;
+    margin-right: $margin-small;
+    height: 250px;
+    .email-body-text {
+      border: $border-standard;
+      flex-grow: 1;
+      resize: none;
+
+    }
+  }
+}
