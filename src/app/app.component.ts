@@ -1,65 +1,30 @@
-/*
- * Angular 2 decorators and services
- */
-import {Component, ViewEncapsulation} from '@angular/core';
+import { Component } from '@angular/core';
+import { Http, Response } from '@angular/http';
 
-import {AppState} from './app.service';
+import { Observable } from 'rxjs';
 
-require('bootstrap/dist/css/bootstrap.css');
-/*
- * App Component
- * Top Level Component
- */
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+import { Store } from '@ngrx/store';
+import { IAppState } from './store/index';
+import { USER_GET } from './store/profile/profile.actions';
+
 @Component({
-    selector: 'app',
-    encapsulation: ViewEncapsulation.None,
-    styleUrls: [
-        './app.component.scss',
-        '../../src/assets/css/reset.css'
-    ],
-    template: `
-    <nav>
-      <span>
-        <a [routerLink]=" ['./email home'] ">
-          Email Home
-        </a>
-      </span>
-      |
-      <span>
-        <a [routerLink]=" ['./compose'] ">
-          New Message
-        </a>
-      </span>
-    </nav>
-
-    <main>
-      <router-outlet></router-outlet>
-    </main>
-
-    <!--<pre class="app-state">this.appState.state = {{ appState.state | json }}</pre>-->
-
-    <footer> &copy; Copyright 2016 </footer>
-  `
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    angularclassLogo = 'assets/img/angularclass-avatar.png';
-    name = 'Angular 2 Webpack Starter';
-    url = 'https://twitter.com/AngularClass';
 
-    constructor(public appState: AppState) {
+  observable$: Observable<{}>;
 
-    }
+  constructor(http: Http, store: Store<IAppState>) {
+    this.observable$ = http
+      .get('/api/public/simple')
+      .map((response: Response) => response.json());
 
-    ngOnInit() {
-        console.log('Initial App State', this.appState.state);
-    }
-
+    store.dispatch({
+      type: USER_GET
+    });
+  }
 }
-
-/*
- * Please review the https://github.com/AngularClass/angular2-examples/ repo for
- * more angular app examples that you may copy/paste
- * (The examples may not be updated as quickly. Please open an issue on github for us to update it)
- * For help or questions please contact us at @AngularClass on twitter
- * or our chat on Slack at https://AngularClass.com/slack-join
- */

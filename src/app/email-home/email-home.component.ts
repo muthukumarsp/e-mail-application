@@ -5,8 +5,9 @@ import {ComposeComponent} from '../compose/compose.component';
 
 @Component({
     selector: 'email-home-page',
-    styles: [require('./email-home.component.scss')],
-    templateUrl: 'email-home.component.html',
+    styles: [require('./email-home.component.scss'),
+        require('bootstrap/dist/css/bootstrap.css')],
+    templateUrl: './email-home.component.html',
     providers: [NgbActiveModal]
 })
 export class EmailHomeComponent {

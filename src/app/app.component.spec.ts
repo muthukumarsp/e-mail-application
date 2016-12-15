@@ -1,22 +1,32 @@
-import {
-  inject,
-  TestBed
-} from '@angular/core/testing';
+/* tslint:disable:no-unused-variable */
 
-// Load the implementations that should be tested
+import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpModule } from '@angular/http';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { AppComponent } from './app.component';
-import { AppState } from './app.service';
+import { StoreModule } from '@ngrx/store';
+import { SharedModule } from './shared/shared.module';
 
-describe('App', () => {
-  // provide our implementations or mocks to the dependency injector
-  beforeEach(() => TestBed.configureTestingModule({
-    providers: [
-      AppState,
-      AppComponent
-    ]}));
+let component:  AppComponent;
+let fixture:    ComponentFixture<AppComponent>;
 
-  it('should have a url', inject([ AppComponent ], (app: AppComponent) => {
-    expect(app.url).toEqual('https://twitter.com/AngularClass');
-  }));
+describe('App: Tmp', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports:        [HttpModule, RouterTestingModule, StoreModule.provideStore({}), SharedModule],
+      declarations:   [AppComponent],
+      providers:      [],
+
+      schemas:        [NO_ERRORS_SCHEMA]
+    }).compileComponents();
+
+    fixture     = TestBed.createComponent(AppComponent);
+    component   = fixture.debugElement.componentInstance;
+  });
+
+  it('should create the app', () => {
+    expect(component).toBeTruthy();
+  });
 
 });

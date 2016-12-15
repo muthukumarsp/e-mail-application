@@ -8,6 +8,7 @@ $margin-small: .25rem;
 $border-standard: 1px solid lightgray;
 :host {
   display: block;
+  border: $border-standard;
 }
 
 .modal-header {

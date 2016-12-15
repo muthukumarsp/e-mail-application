@@ -2,11 +2,14 @@ import {Component, Inject} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Store} from '@ngrx/store';
+import {IAppState} from '../store/index';
+import {SEND_EMAIL} from '../store/email/email.actions';
 
 @Component({
     selector: 'compose',
     styles: [require('./compose.component.scss')],
-    templateUrl: 'compose.component.html',
+    templateUrl: './compose.component.html',
     providers: [NgbActiveModal]
 })
 export class ComposeComponent {
@@ -15,13 +18,14 @@ export class ComposeComponent {
 
     constructor(@Inject(FormBuilder) fb: FormBuilder,
                 public route: ActivatedRoute,
-                public activeModal: NgbActiveModal) {
+                public activeModal: NgbActiveModal,
+                public store: Store<IAppState>) {
         this.form = fb.group({
-            toField: ['', Validators.required],
+            toField: ['muthukumarsp@gmail.com,spmuthukumar@gmail.com', Validators.required],
             ccField: [''],
             bccField: [''],
-            subject: [''],
-            emailBodyText:['']
+            subject: ['test'],
+            emailBodyText: ['test message']
         });
 
     }
@@ -64,39 +68,16 @@ export class ComposeComponent {
 
         // Or, grab the value of one control:
         let email = this.form.value.toField;
+        if (this.form.valid) {
+
+            this.store.dispatch({
+                type: SEND_EMAIL,
+                payload: this.form.value
+            });
+
+            this.form.reset();
+        }
 
     }
 
 }
-
-/*
- import {Component, Inject} from '@angular/core';
- import {FormBuilder, FormGroup, Validators} from '@angular/forms';
- @Component({
- selector: 'example-app',
- template: `
- <form [formGroup]="form">
- <div formGroupName="name">
- <input formControlName="first" placeholder="First">
- <input formControlName="last" placeholder="Last">
- </div>
- <input formControlName="email" placeholder="Email">
- <button>Submit</button>
- </form>
- <p>Value: {{ form.value | json }}</p>
- <p>Validation status: {{ form.status }}</p>
- `
- })
- export class FormBuilderComp {
- form: FormGroup;
- constructor(@Inject(FormBuilder) fb: FormBuilder) {
- this.form = fb.group({
- name: fb.group({
- first: ['Nancy', Validators.minLength(2)],
- last: 'Drew',
- }),
- email: '',
- });
- }
- }
- */
