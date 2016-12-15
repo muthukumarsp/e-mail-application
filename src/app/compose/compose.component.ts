@@ -21,11 +21,11 @@ export class ComposeComponent {
                 public activeModal: NgbActiveModal,
                 public store: Store<IAppState>) {
         this.form = fb.group({
-            toField: ['muthukumarsp@gmail.com,spmuthukumar@gmail.com', Validators.required],
+            toField: ['muthu_career@rediffmail.com', Validators.required],
             ccField: [''],
             bccField: [''],
-            subject: ['test'],
-            emailBodyText: ['test message']
+            subject: ['From MailGun'],
+            emailBodyText: ['Hi, This is a test message send using MailGun']
         });
 
     }
@@ -61,15 +61,9 @@ export class ComposeComponent {
         });
     }
 
-    send(event) {
-        // Show the value of the form
-        let formData = this.form.value;
-        // { email: 'blah@blah.net', password: 'imnottelling1' }
+    send() {
 
-        // Or, grab the value of one control:
-        let email = this.form.value.toField;
         if (this.form.valid) {
-
             this.store.dispatch({
                 type: SEND_EMAIL,
                 payload: this.form.value
