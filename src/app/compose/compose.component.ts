@@ -18,11 +18,17 @@ export class ComposeComponent {
                 public activeModal: NgbActiveModal,
                 public store: Store<IAppState>) {
         this.form = fb.group({
-            toField: ['muthu_career@rediffmail.com,muthukumarsp@gmail.com', Validators.required],
-            ccField: ['muthukumarsp@outlook.com'],
-            bccField: ['spmuthukumar@gmail.com'],
-            subject: ['From MailGun'],
-            emailBodyText: ['Hi, This is a test message sent using MailGun/SendGrid']
+            /*   // For testing only
+             toField: ['muthu_career@rediffmail.com,muthukumarsp@gmail.com', Validators.required],
+             ccField: ['muthukumarsp@outlook.com'],
+             bccField: ['spmuthukumar@gmail.com'],
+             subject: ['From MailGun'],
+             emailBodyText: ['Hi, This is a test message sent using MailGun/SendGrid']*/
+            toField: ['', Validators.required],
+            ccField: [''],
+            bccField: [''],
+            subject: [''],
+            emailBodyText: ['']
         });
 
     }
