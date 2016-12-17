@@ -1,14 +1,13 @@
-<app-ui-top-navigation></app-ui-top-navigation>
+<header>
+    <app-ui-top-navigation></app-ui-top-navigation>
+</header>
 
-<app-ui-sub-navigation [title]="(observable$ | async)?.title" [description]="(observable$ | async)?.text"></app-ui-sub-navigation>
+<main>
+    <router-outlet></router-outlet>
+</main>
 
-<div class="main">
+<footer> &copy; Copyright 2016</footer>
 
-  <router-outlet></router-outlet>
-
-</div>
-
-<router-outlet name='modal'></router-outlet>
 
 <!-- Development tools -->
 <ngrx-store-log-monitor toggleCommand="ctrl-h" positionCommand="ctrl-m"></ngrx-store-log-monitor>

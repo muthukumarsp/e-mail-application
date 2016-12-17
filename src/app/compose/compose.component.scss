@@ -14,6 +14,9 @@ $border-standard: 1px solid lightgray;
 .modal-header {
   background: $color-black;
   color: $text-color-white;
+  .close{
+    color:white;
+  }
 }
 
 .modal-body {

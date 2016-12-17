@@ -2,6 +2,7 @@ import {Router, Response, Request} from 'express';
 import * as uuid from 'node-uuid';
 
 const emailRouter: Router = Router();
+
 let nodemailer = require('nodemailer');
 let mg = require('nodemailer-mailgun-transport');
 // This is your API key that you retrieve from www.mailgun.com/cp (free up to 10K monthly emails)
@@ -27,17 +28,21 @@ let nodemailerMailgun = nodemailer.createTransport(mg(auth));
 
 emailRouter.post('/', (request: Request, response: Response) => {
 
-    let email = {
+    console.log('CC address', request.body);
+    let email: IEmail = {
         to: request.body.toField,
         from: 'muthukumarsp@muthu-maildomain.com',
-        cc: request.body.ccField,
-        bcc: request.body.bccField,
         subject: request.body.subject,
         text: 'Awesome sauce',
         html: '<b>HTML Contents also supported</b> <br/> <pre>' + request.body.emailBodyText + '</pre>',
         'h:Reply-To': 'muthukumarsp@gmail.com',
     };
-
+    if (request.body.ccField) {
+        email.cc = request.body.ccField;
+    }
+    if (request.body.bccField) {
+        email.bcc = request.body.bccField;
+    }
     // Uncomment the following line to  Test sendgrid
     // sendBySendGridMailer(email, response);
     console.log('request', JSON.stringify(request.body.emailBodyText));
@@ -68,3 +73,15 @@ function sendBySendGridMailer(email: any, response: Response) {
 }
 
 export {emailRouter}
+
+interface IEmail {
+    to: string;
+    from: string,
+    cc?: string;
+    bcc?: string;
+    subject: string;
+    html?: string;
+    text: string;
+    'h:Reply-To'?: string;
+
+}

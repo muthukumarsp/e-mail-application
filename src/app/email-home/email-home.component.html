@@ -1,11 +1,11 @@
 <header>
       <span>
-        <!--<button class="compose-button" [routerLink]=" ['/compose'] "> Compose-->
-        <button class="compose-button" (click)="open()" > Compose
+        <button class="compose-button" (click)="open()"> Compose
         </button>
       </span>
 
-    <template ngbModalContainer></template>
+    <template ngbModalContainer>
+    </template>
+    <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
 
-<!--<compose></compose>-->
 </header>

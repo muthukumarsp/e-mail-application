@@ -9,8 +9,6 @@ import {AppComponent} from './app.component';
 import {routing} from './app.routing';
 import {store, effects} from './store';
 import {SharedModule} from './shared/shared.module';
-import {EmailHomeComponent} from './email-home/email-home.component';
-import {ComposeComponent} from './compose/compose.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {EmailHomeModule} from './email-home/email-home.module';
 import {ComposeModule} from './compose/compose.module';
@@ -31,7 +29,7 @@ import {ComposeModule} from './compose/compose.module';
         ReactiveFormsModule,
         StoreDevtoolsModule.instrumentStore({
             monitor: useLogMonitor({
-                visible: true,
+                visible: false,
                 position: 'right'
             })
         }),

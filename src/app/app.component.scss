@@ -1,0 +1,15 @@
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+@import "../assets/scss/global-variables";
+
+.main {
+  width: 800px;
+  padding: 20px;
+}
+
+span.active {
+  background-color: gray;
+}
+
+footer {
+  bottom: 0;
+}

@@ -2,13 +2,12 @@ import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ComposeComponent} from './compose.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
-        ReactiveFormsModule,
+        ReactiveFormsModule
     ],
     declarations: [
         ComposeComponent
@@ -17,6 +16,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
         ComposeComponent
     ],
     exports: [ComposeComponent],
+    entryComponents :[ComposeComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ComposeModule {

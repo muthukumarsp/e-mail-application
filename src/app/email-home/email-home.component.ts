@@ -1,7 +1,10 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbActiveModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {ComposeComponent} from '../compose/compose.component';
+import {Store} from '@ngrx/store';
+import {IAppState} from '../store/index';
+import {Observable, Subscription} from 'rxjs';
 
 @Component({
     selector: 'email-home-page',
@@ -11,47 +14,41 @@ import {ComposeComponent} from '../compose/compose.component';
     providers: [NgbActiveModal]
 })
 export class EmailHomeComponent {
-    localState: any;
+    successMessage: string;
+    modalRef: NgbModalRef;
+
+    email$: Observable<{}>;
+    emailSub: Subscription;
+    emailSubDebounce: Subscription;
 
     constructor(public route: ActivatedRoute,
-                private modalService: NgbModal) {
+                private modalService: NgbModal,
+                public store: Store<IAppState>) {
+        this.email$ = store.select('email');
 
     }
 
     ngOnInit() {
-        this.route
-            .data
-            .subscribe((data: any) => {
-                // your resolved data from route
-                this.localState = data.yourData;
-            });
+        this.emailSub = this.email$.subscribe((emailState: any) => {
+            if (emailState.length) {
+                this.successMessage = 'E-mail sent status :' + emailState[0].sendStatus;
+                this.modalRef.dismiss();
+            }
+        });
+        this.emailSubDebounce = this.email$.debounceTime(5000).subscribe(() => {
+            this.successMessage = null;
+        });
 
-        console.log('hello `About` component');
-        // static data that is bundled
-        // var mockData = require('assets/mock-data/mock-data.json');
-        // console.log('mockData', mockData);
-        // if you're working with mock data you can also use http.get('assets/mock-data/mock-data.json')
-        this.asyncDataWithWebpack();
     }
 
-    asyncDataWithWebpack() {
-        // you can also async load mock data with 'es6-promise-loader'
-        // you would do this if you don't want the mock-data bundled
-        // remember that 'es6-promise-loader' is a promise
-        setTimeout(() => {
-
-            System.import('../../assets/mock-data/mock-data.json')
-                .then(json => {
-                    console.log('async mockData', json);
-                    this.localState = json;
-                });
-
-        });
+    ngOnDestroy() {
+        this.emailSub.unsubscribe();
+        this.emailSubDebounce.unsubscribe();
     }
 
     open() {
-        const modalRef = this.modalService.open(ComposeComponent);
-        modalRef.componentInstance.name = 'World';
+        this.modalRef = this.modalService.open(ComposeComponent);
+        this.modalRef.componentInstance.name = 'World';
     }
 
 }
